@@ -1,36 +1,38 @@
-def fibonacci_number_naive(n):
-    """O(2^n) time complexity"""
-    if n <= 1:
-        return n
-    return fibonacci_number_naive(n - 1) + fibonacci_number_naive(n - 2)
-
-def fibonacci_number(n):
-    """O(n) time complexity"""
+def get_fibonacci_last_digit_naive(n):
+    """O(n) time complexity - Naive Iterative Approach"""
     if n <= 1:
         return n
     prev, current = 0, 1
     for _ in range(2, n + 1):
-        prev, current = current, prev + current
+        tmp_previous = prev
+        prev = current
+        current = tmp_previous + current
+    return current % 10
+
+def get_fibonacci_last_digit(n):
+    """O(n) time complexity - Efficient Iterative Approach"""
+    if n <= 1:
+        return n
+    prev, current = 0, 1
+    for _ in range(2, n + 1):
+        prev, current = current, (prev + current) % 10
     return current
 
-def fibonacci_number_functional_naive(n):
-    """O(2^n) time complexity, functional naive approach"""
-    def fib_helper(n, a=0, b=1):
-        return a if n == 0 else fib_helper(n - 1, b, a + b)
-    return fib_helper(n)
+def get_fibonacci_last_digit_functional_naive(n):
+    """O(n) time complexity, functional naive approach"""
+    def fib(n, a=0, b=1):
+        return a if n == 0 else fib(n - 1, b, (a + b) % 10)
+    return fib(n)
 
-def fibonacci_number_functional(n):
+def get_fibonacci_last_digit_functional(n):
     """O(n) time complexity, functional approach"""
-    from itertools import islice
+    fib_sequence = ((0, 1), (1, 0))
+    fib = (sum(pair) % 10 for pair in fib_sequence)
+    for _ in range(n):
+        next(fib)
+    return next(fib)
 
-    def fib_sequence():
-        a, b = 0, 1
-        while True:
-            yield a
-            a, b = b, a + b
-
-    return next(islice(fib_sequence(), n, None))
-
+# Function to compare two strategies
 def compare_strategies(n, *strategies):
     results = [strategy(n) for strategy in strategies]
     if len(set(results)) != 1:
@@ -38,6 +40,7 @@ def compare_strategies(n, *strategies):
         return False
     return True
 
+# Stress Test Function
 def stress_test(max_iterations, max_n, *strategies):
     import random
     for iteration in range(max_iterations):
@@ -67,8 +70,8 @@ def stress_test(max_iterations, max_n, *strategies):
 
 if __name__ == '__main__':
     # Uncomment to run stress test
-    stress_test(100000, 40, fibonacci_number_naive, fibonacci_number, fibonacci_number_functional_naive, fibonacci_number_functional)
+    stress_test(100000, 40, get_fibonacci_last_digit_naive, get_fibonacci_last_digit, get_fibonacci_last_digit_functional_naive, get_fibonacci_last_digit_functional)
 
     # Uncomment to run with user input
     # input_n = int(input())
-    # print(fibonacci_number(input_n))
+    # print(get_fibonacci_last_digit(input_n))

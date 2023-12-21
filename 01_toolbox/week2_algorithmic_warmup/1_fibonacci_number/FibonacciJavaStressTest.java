@@ -1,5 +1,4 @@
 import java.util.AbstractMap;
-import java.util.Scanner;
 import java.util.function.UnaryOperator;
 import java.util.stream.Stream;
 import java.util.Random;
