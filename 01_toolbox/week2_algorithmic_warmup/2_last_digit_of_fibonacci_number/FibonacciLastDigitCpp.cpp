@@ -40,23 +40,31 @@ int fibonacci_last_digit(int n) {
     return current;
 }
 
-// O(n) time complexity, functional naive approach
-int fibonacci_last_digit_functional_naive(int n) {
-    std::function<int(int, int, int)> fib = [&fib](int n, int a, int b) -> int {
-        return n == 0 ? a : fib(n - 1, b, (a + b) % 10);
+// O(n) time complexity - Functional Naive Recursive Approach
+std::function<int(int)> fibonacci_last_digit_functional_naive = [](int n) -> int {
+    std::function<int(int)> fib = [&](int n) -> int {
+        if (n <= 1) return n;
+        return (fib(n - 1) + fib(n - 2)) % 10;
     };
-    return fib(n, 0, 1);
-}
+    return fib(n);
+};
 
-// O(n) time complexity, functional approach (Efficient)
-int fibonacci_last_digit_functional(int n) {
+// O(n) time complexity - Functional Iterative Approach
+std::function<int(int)> fibonacci_last_digit_functional = [](int n) -> int {
     if (n <= 1) return n;
-    std::pair<int, int> fib_pair = {0, 1};
+
+    int prev = 0, current = 1;
+    std::function<void()> update = [&]() {
+        int newCurrent = (prev + current) % 10;
+        prev = current;
+        current = newCurrent;
+    };
+
     for (int i = 2; i <= n; ++i) {
-        fib_pair = {fib_pair.second, (fib_pair.first + fib_pair.second) % 10};
+        update();
     }
-    return fib_pair.second;
-}
+    return current;
+};
 
 void test_solution() {
     assert(fibonacci_last_digit(21) == 6);

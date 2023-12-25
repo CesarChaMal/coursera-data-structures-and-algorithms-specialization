@@ -43,7 +43,7 @@ function getFibonacciLastDigitFunctionalNaive(n) {
 function getFibonacciLastDigitFunctional(n) {
     if (n === 0) return 0;
 
-    return Array.from({ length: n - 1 }) // Adjust the length to correctly handle indexing
+    return Array.from({length: n - 1}) // Adjust the length to correctly handle indexing
         .reduce(([prev, curr]) => [curr, (prev + curr) % 10], [0, 1])[1];
 }
 

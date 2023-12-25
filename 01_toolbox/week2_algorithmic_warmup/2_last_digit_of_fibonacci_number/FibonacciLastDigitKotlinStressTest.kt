@@ -98,8 +98,10 @@ fun main(args: Array<String>) {
 
         val naive = FibonacciLastDigitKotlinStressTest.FibonacciStrategy { tester.getFibonacciLastDigitNaive(it) }
         val efficient = FibonacciLastDigitKotlinStressTest.FibonacciStrategy { tester.getFibonacciLastDigit(it) }
-        val functional = FibonacciLastDigitKotlinStressTest.FibonacciStrategy { tester.getFibonacciLastDigitFunctionalNaive(it) }
-        val functionalNaive = FibonacciLastDigitKotlinStressTest.FibonacciStrategy { tester.getFibonacciLastDigitFunctional(it) }
+        val functional =
+            FibonacciLastDigitKotlinStressTest.FibonacciStrategy { tester.getFibonacciLastDigitFunctionalNaive(it) }
+        val functionalNaive =
+            FibonacciLastDigitKotlinStressTest.FibonacciStrategy { tester.getFibonacciLastDigitFunctional(it) }
 
         if (!tester.compareStrategies(n, naive, efficient)) {
             println("Naive vs Efficient failed")

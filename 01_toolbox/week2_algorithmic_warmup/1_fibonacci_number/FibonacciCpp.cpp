@@ -34,25 +34,31 @@ int fibonacci(int n) {
     return current;
 }
 
-// O(2^n) time complexity, functional approach (Naive)
-int fibonacci_functional_naive(int n) {
-    std::function<int(int)> fib = [&fib](int n) -> int {
-        return (n <= 1) ? n : fib(n - 1) + fib(n - 2);
+// O(2^n) time complexity - Functional Naive Recursive Approach
+std::function<int(int)> fibonacci_functional_naive = [](int n) -> int {
+    std::function<int(int)> fib = [&](int n) -> int {
+        if (n <= 1) return n;
+        return fib(n - 1) + fib(n - 2);
     };
     return fib(n);
-}
+};
 
-// O(n) time complexity, functional approach (Efficient)
-int fibonacci_functional(int n) {
+// O(n) time complexity - Functional Iterative Approach
+std::function<int(int)> fibonacci_functional = [](int n) -> int {
     if (n <= 1) return n;
+
     int prev = 0, current = 1;
-    for (int i = 2; i <= n; ++i) {
-        int next = prev + current;
+    std::function<void()> update = [&]() {
+        int newCurrent = prev + current;
         prev = current;
-        current = next;
+        current = newCurrent;
+    };
+
+    for (int i = 2; i <= n; ++i) {
+        update();
     }
     return current;
-}
+};
 
 void test_solution() {
     assert(fibonacci(3) == 2);

@@ -9,6 +9,7 @@ def get_fibonacci_last_digit_naive(n):
         current = tmp_previous + current
     return current % 10
 
+
 def get_fibonacci_last_digit(n):
     """O(n) time complexity - Efficient Iterative Approach"""
     if n <= 1:
@@ -18,11 +19,15 @@ def get_fibonacci_last_digit(n):
         prev, current = current, (prev + current) % 10
     return current
 
+
 def get_fibonacci_last_digit_functional_naive(n):
     """O(n) time complexity, functional naive approach"""
+
     def fib(n, a=0, b=1):
         return a if n == 0 else fib(n - 1, b, (a + b) % 10)
+
     return fib(n)
+
 
 def get_fibonacci_last_digit_functional(n):
     """O(n) time complexity, functional approach"""
@@ -32,6 +37,7 @@ def get_fibonacci_last_digit_functional(n):
         next(fib)
     return next(fib)
 
+
 # Function to compare two strategies
 def compare_strategies(n, *strategies):
     results = [strategy(n) for strategy in strategies]
@@ -39,6 +45,7 @@ def compare_strategies(n, *strategies):
         print(f"Discrepancy found at n={n}: {results}")
         return False
     return True
+
 
 # Stress Test Function
 def stress_test(max_iterations, max_n, *strategies):
@@ -70,7 +77,8 @@ def stress_test(max_iterations, max_n, *strategies):
 
 if __name__ == '__main__':
     # Uncomment to run stress test
-    stress_test(100000, 40, get_fibonacci_last_digit_naive, get_fibonacci_last_digit, get_fibonacci_last_digit_functional_naive, get_fibonacci_last_digit_functional)
+    stress_test(100000, 40, get_fibonacci_last_digit_naive, get_fibonacci_last_digit,
+                get_fibonacci_last_digit_functional_naive, get_fibonacci_last_digit_functional)
 
     # Uncomment to run with user input
     # input_n = int(input())

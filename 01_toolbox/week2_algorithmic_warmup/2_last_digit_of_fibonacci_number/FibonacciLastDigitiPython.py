@@ -9,6 +9,7 @@ def get_fibonacci_last_digit_naive(n):
         current = tmp_previous + current
     return current % 10
 
+
 def get_fibonacci_last_digit(n):
     """O(n) time complexity - Efficient Iterative Approach"""
     if n <= 1:
@@ -18,11 +19,15 @@ def get_fibonacci_last_digit(n):
         prev, current = current, (prev + current) % 10
     return current
 
+
 def get_fibonacci_last_digit_functional_naive(n):
     """O(n) time complexity, functional naive approach"""
+
     def fib(n, a=0, b=1):
         return a if n == 0 else fib(n - 1, b, (a + b) % 10)
+
     return fib(n)
+
 
 def get_fibonacci_last_digit_functional(n):
     """O(n) time complexity, functional approach"""
@@ -31,6 +36,7 @@ def get_fibonacci_last_digit_functional(n):
     for _ in range(n):
         next(fib)
     return next(fib)
+
 
 if __name__ == '__main__':
     input_n = int(input())
