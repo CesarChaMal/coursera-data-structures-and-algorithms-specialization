@@ -2,7 +2,7 @@
 #include <functional>
 
 // O(a * b) time complexity - Naive Approach
-long long lcm_naive(long long a, long long b) {
+long long lcm_naive1(long long a, long long b) {
   for (long l = 1; l <= (long long) a * b; ++l)
     if (l % a == 0 && l % b == 0)
       return l;
@@ -47,6 +47,6 @@ std::function<long long(long long, long long)> lcm_functional = [](long long a, 
 int main() {
   long long a, b;
   std::cin >> a >> b;
-  std::cout << lcm_naive(a, b) << std::endl;
+  std::cout << lcm_naive1(a, b) << std::endl;
   return 0;
 }

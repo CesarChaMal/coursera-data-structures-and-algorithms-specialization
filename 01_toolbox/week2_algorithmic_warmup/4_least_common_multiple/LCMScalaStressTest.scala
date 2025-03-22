@@ -7,7 +7,7 @@ import scala.util.Random
 object LCMScalaStressTest {
 
   // O(a * b) time complexity - Naive Approach
-  def lcm_naive(a: Long, b: Long): Long = {
+  def lcm_naive1(a: Long, b: Long): Long = {
     @tailrec
     def findLcm(current: Long, limit: Long): Long = {
       if (current > limit) limit
@@ -94,7 +94,7 @@ object LCMScalaStressTest {
       println(s"Testing with a = $a and b = $b")
 
       val strategies = Seq(
-        lcm_naive _,
+        lcm_naive1 _,
         lcm_naive2 _,
         lcm _,
         lcmFunctionalNaive _,

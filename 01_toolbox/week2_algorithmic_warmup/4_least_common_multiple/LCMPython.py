@@ -9,7 +9,7 @@ def lcm(a, b):
     """Efficient computation of LCM using GCD."""
     return (a * b) // gcd(a, b)
 
-def lcm_naive(a, b):
+def lcm_naive1(a, b):
     """Naive approach to find LCM."""
     for l in range(1, a * b + 1):
         if l % a == 0 and l % b == 0:

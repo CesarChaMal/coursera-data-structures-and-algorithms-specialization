@@ -8,7 +8,7 @@ import java.util.function.BiFunction
 class LCMKotlin {
 
     // O(a * b) time complexity - Naive LCM
-    fun lcmNaive(a: Long, b: Long): Long {
+    fun lcmNaive1(a: Long, b: Long): Long {
         for (l in 1..a.toLong() * b)
             if (l % a == 0L && l % b == 0L)
                 return l

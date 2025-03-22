@@ -9,7 +9,7 @@ import kotlin.math.abs
 class LCMKotlinStressTest {
 
     // O(a * b) time complexity - Naive LCM
-    fun lcmNaive(a: Long, b: Long): Long {
+    fun lcmNaive1(a: Long, b: Long): Long {
         for (l in 1..a.toLong() * b)
             if (l % a == 0L && l % b == 0L)
                 return l
@@ -125,7 +125,7 @@ fun main(args: Array<String>) {
 
         println("Testing with a = $a and b = $b")
 
-        val naive = LCMKotlinStressTest.LCMStrategy { x, y -> tester.lcmNaive(x, y) }
+        val naive1 = LCMKotlinStressTest.LCMStrategy { x, y -> tester.lcmNaive1(x, y) }
         val naive2 = LCMKotlinStressTest.LCMStrategy { x, y -> tester.lcmNaive2(x, y) }
         val efficient = LCMKotlinStressTest.LCMStrategy { x, y -> tester.lcm(x, y) }
         val functionalNaive = LCMKotlinStressTest.LCMStrategy { x, y -> tester.lcmFunctionalNaive(x, y) }
@@ -133,7 +133,7 @@ fun main(args: Array<String>) {
 //        val functionalNaive = LCMKotlinStressTest.LCMStrategy { x, y -> tester.lcmFunctionalNaive.apply(x, y) }
 //        val functional = LCMKotlinStressTest.LCMStrategy { x, y -> tester.lcmFunctional.apply(x, y) }
 
-        if (!tester.compareStrategies(naive, efficient, a, b)) {
+        if (!tester.compareStrategies(naive1, efficient, a, b)) {
             println("Naive vs Efficient failed")
             break
         }

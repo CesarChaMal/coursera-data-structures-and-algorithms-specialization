@@ -17,7 +17,7 @@ function readInput() {
 }
 
 // O(a * b) time complexity - Naive Approach
-function lcm_naive(a, b) {
+function lcm_naive1(a, b) {
     for (let l = 1; l <= a * b; ++l) {
         if (l % a === 0 && l % b === 0) {
             return l;

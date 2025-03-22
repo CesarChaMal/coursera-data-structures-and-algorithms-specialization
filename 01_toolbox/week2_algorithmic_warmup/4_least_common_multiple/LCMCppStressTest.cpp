@@ -3,7 +3,7 @@
 #include <random>
 
 // O(a * b) time complexity - Naive Approach
-long long lcm_naive(long long a, long long b) {
+long long lcm_naive1(long long a, long long b) {
   for (long l = 1; l <= (long long) a * b; ++l)
     if (l % a == 0 && l % b == 0)
       return l;
@@ -46,17 +46,17 @@ std::function<long long(long long, long long)> lcm_functional = [](long long a, 
 };
 
 bool CompareStrategies(int a, int b) {
-    auto resultNaive = lcm_naive(a, b);
+    auto resultNaive1 = lcm_naive1(a, b);
     auto resultNaive2 = lcm_naive2(a, b);
     auto resultEfficient = lcm(a, b);
     auto resultFunctional = lcm_functional(a, b);
 
-    if (resultNaive != resultEfficient ||
+    if (resultNaive1 != resultEfficient ||
         resultNaive2 != resultEfficient ||
         resultNaive != resultFunctional ||
         resultNaive2 != resultFunctional) {
         std::cout << "Discrepancy found at a=" << a << ", b=" << b << ":\n";
-        std::cout << "Naive: " << resultNaive << "\n";
+        std::cout << "Naive: " << resultNaive1 << "\n";
         std::cout << "Naive2: " << resultNaive2 << "\n";
         std::cout << "Efficient: " << resultEfficient << "\n";
         std::cout << "Functional: " << resultFunctional << "\n";

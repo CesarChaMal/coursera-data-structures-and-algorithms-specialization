@@ -5,7 +5,7 @@ import static java.lang.System.out;
 
 public class LCMJavaStressTest {
     // O(a * b) time complexity - Naive Approach
-    private static long lcm_naive(long a, long b) {
+    private static long lcm_naive1(long a, long b) {
         for (long l = 1; l <= a * b; ++l)
             if (l % a == 0 && l % b == 0)
                 return l;
@@ -100,13 +100,13 @@ public class LCMJavaStressTest {
 
             out.println("Testing with a = " + a + " and b = " + b);
 
-            LCMJavaStressTest.LCMStrategy naive = LCMJavaStressTest::lcm_naive;
+            LCMJavaStressTest.LCMStrategy naive1 = LCMJavaStressTest::lcm_naive1;
             LCMJavaStressTest.LCMStrategy naive2 = LCMJavaStressTest::lcm_naive2;
             LCMJavaStressTest.LCMStrategy efficient = LCMJavaStressTest::lcm;
             LCMJavaStressTest.LCMStrategy functionalNaive = lcmFunctionalNaive::apply;
             LCMJavaStressTest.LCMStrategy functional = lcmFunctional::apply;
 
-            if (!compareStrategies(naive, efficient, a, b)) {
+            if (!compareStrategies(naive1, efficient, a, b)) {
                 out.println("Naive vs Efficient failed");
                 break;
             }

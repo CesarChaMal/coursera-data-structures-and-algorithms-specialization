@@ -57,12 +57,12 @@ public class FibonacciLastDigitJavaStressTest {
 
   // Functional interface for strategies
   @FunctionalInterface
-  interface FibonacciStrategy {
+  interface FibonacciLastDigitStrategy {
     long compute(int n);
   }
 
   // Method to compare strategies
-  static boolean compareStrategies(FibonacciStrategy strategy1, FibonacciStrategy strategy2, int n) {
+  static boolean compareStrategies(FibonacciLastDigitStrategy strategy1, FibonacciLastDigitStrategy strategy2, int n) {
     long result1 = strategy1.compute(n);
     long result2 = strategy2.compute(n);
     if (result1 != result2) {
@@ -71,7 +71,6 @@ public class FibonacciLastDigitJavaStressTest {
     }
     return true;
   }
-
   public static void main(String args[]) {
     // Stress test
     int maxIterations = 100_000;
@@ -82,27 +81,74 @@ public class FibonacciLastDigitJavaStressTest {
 
       out.println("Testing with n = " + n);
 
-      FibonacciStrategy naive = FibonacciLastDigitJavaStressTest::getFibonacciLastDigitNaive;
-      FibonacciStrategy efficient = FibonacciLastDigitJavaStressTest::getFibonacciLastDigit;
-      FibonacciStrategy functional = FibonacciLastDigitJavaStressTest::getFibonacciLastDigitFunctionalNaive;
-      FibonacciStrategy functionalNaive = FibonacciLastDigitJavaStressTest::getFibonacciLastDigitFunctional;
+      FibonacciLastDigitStrategy naive = FibonacciLastDigitJavaStressTest::getFibonacciLastDigitNaive;
+      FibonacciLastDigitStrategy efficient = FibonacciLastDigitJavaStressTest::getFibonacciLastDigit;
+      FibonacciLastDigitStrategy functionalNaive = FibonacciLastDigitJavaStressTest::getFibonacciLastDigitFunctionalNaive;
+      FibonacciLastDigitStrategy functional = FibonacciLastDigitJavaStressTest::getFibonacciLastDigitFunctional;
 
-      if (!compareStrategies(naive, efficient, n)) {
+      // Individual comparisons for each pair of strategies
+      if (!compareStrategies(FibonacciSumLastDigitJavaStressTest::getFibonacciSumNaive, FibonacciSumLastDigitJavaStressTest::getFibonacciSumEfficient, n)) {
         out.println("Naive vs Efficient failed");
         break;
       }
-      if (!compareStrategies(functionalNaive, efficient, n)) {
-        out.println("Functional Naive vs Efficient failed");
+      if (!compareStrategies(FibonacciSumLastDigitJavaStressTest::getFibonacciSumNaive, FibonacciSumLastDigitJavaStressTest::getFibonacciSumMatrix, n)) {
+        out.println("Naive vs Matrix failed");
         break;
       }
-
-      if (!compareStrategies(functional, efficient, n)) {
-        out.println("Functional vs Efficient failed");
+      if (!compareStrategies(FibonacciSumLastDigitJavaStressTest::getFibonacciSumNaive, FibonacciSumLastDigitJavaStressTest::getFibonacciSumNaiveFunctional, n)) {
+        out.println("Naive vs Functional Naive failed");
+        break;
+      }
+      if (!compareStrategies(FibonacciSumLastDigitJavaStressTest::getFibonacciSumNaive, FibonacciSumLastDigitJavaStressTest::getFibonacciSumEfficientFunctional, n)) {
+        out.println("Naive vs Functional Efficient failed");
+        break;
+      }
+      if (!compareStrategies(FibonacciSumLastDigitJavaStressTest::getFibonacciSumNaive, FibonacciSumLastDigitJavaStressTest::getFibonacciSumMatrixFunctional, n)) {
+        out.println("Naive vs Functional Matrix failed");
+        break;
+      }
+      if (!compareStrategies(FibonacciSumLastDigitJavaStressTest::getFibonacciSumEfficient, FibonacciSumLastDigitJavaStressTest::getFibonacciSumMatrix, n)) {
+        out.println("Efficient vs Matrix failed");
+        break;
+      }
+      if (!compareStrategies(FibonacciSumLastDigitJavaStressTest::getFibonacciSumEfficient, FibonacciSumLastDigitJavaStressTest::getFibonacciSumNaiveFunctional, n)) {
+        out.println("Efficient vs Functional Naive failed");
+        break;
+      }
+      if (!compareStrategies(FibonacciSumLastDigitJavaStressTest::getFibonacciSumEfficient, FibonacciSumLastDigitJavaStressTest::getFibonacciSumEfficientFunctional, n)) {
+        out.println("Efficient vs Functional Efficient failed");
+        break;
+      }
+      if (!compareStrategies(FibonacciSumLastDigitJavaStressTest::getFibonacciSumEfficient, FibonacciSumLastDigitJavaStressTest::getFibonacciSumMatrixFunctional, n)) {
+        out.println("Efficient vs Functional Matrix failed");
+        break;
+      }
+      if (!compareStrategies(FibonacciSumLastDigitJavaStressTest::getFibonacciSumMatrix, FibonacciSumLastDigitJavaStressTest::getFibonacciSumNaiveFunctional, n)) {
+        out.println("Matrix vs Functional Naive failed");
+        break;
+      }
+      if (!compareStrategies(FibonacciSumLastDigitJavaStressTest::getFibonacciSumMatrix, FibonacciSumLastDigitJavaStressTest::getFibonacciSumEfficientFunctional, n)) {
+        out.println("Matrix vs Functional Efficient failed");
+        break;
+      }
+      if (!compareStrategies(FibonacciSumLastDigitJavaStressTest::getFibonacciSumMatrix, FibonacciSumLastDigitJavaStressTest::getFibonacciSumMatrixFunctional, n)) {
+        out.println("Matrix vs Functional Matrix failed");
+        break;
+      }
+      if (!compareStrategies(FibonacciSumLastDigitJavaStressTest::getFibonacciSumNaiveFunctional, FibonacciSumLastDigitJavaStressTest::getFibonacciSumEfficientFunctional, n)) {
+        out.println("Functional Naive vs Functional Efficient failed");
+        break;
+      }
+      if (!compareStrategies(FibonacciSumLastDigitJavaStressTest::getFibonacciSumNaiveFunctional, FibonacciSumLastDigitJavaStressTest::getFibonacciSumMatrixFunctional, n)) {
+        out.println("Functional Naive vs Functional Matrix failed");
+        break;
+      }
+      if (!compareStrategies(FibonacciSumLastDigitJavaStressTest::getFibonacciSumEfficientFunctional, FibonacciSumLastDigitJavaStressTest::getFibonacciSumMatrixFunctional, n)) {
+        out.println("Functional Efficient vs Functional Matrix failed");
         break;
       }
 
       out.println("OK");
-
 //      Scanner in = new Scanner(System.in);
 //      int n = in.nextInt();
 //      out.println(calcFib(n));

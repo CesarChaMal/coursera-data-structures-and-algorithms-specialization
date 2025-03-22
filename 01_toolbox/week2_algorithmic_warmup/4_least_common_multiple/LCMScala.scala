@@ -4,7 +4,7 @@ import scala.io.StdIn
 object LCMScala {
 
   // O(a * b) time complexity - Naive Approach
-  def lcm_naive(a: Long, b: Long): Long = {
+  def lcm_naive1(a: Long, b: Long): Long = {
     @tailrec
     def findLcm(current: Long, limit: Long): Long = {
       if (current > limit) limit

@@ -5,7 +5,7 @@ import static java.lang.System.out;
 
 public class LCMJava {
     // O(a * b) time complexity - Naive Approach
-    private static long lcm_naive(long a, long b) {
+    private static long lcm_naive1(long a, long b) {
         for (long l = 1; l <= a * b; ++l)
             if (l % a == 0 && l % b == 0)
                 return l;

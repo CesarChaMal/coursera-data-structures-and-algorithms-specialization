@@ -17,7 +17,7 @@ function readInput() {
 }
 
 // O(a * b) time complexity - Naive Approach
-function lcm_naive(a, b) {
+function lcm_naive1(a, b) {
     for (let l = 1; l <= a * b; ++l) {
         if (l % a === 0 && l % b === 0) {
             return l;
@@ -90,10 +90,9 @@ function stressTest(maxIterations, maxN) {
         const b = Math.floor(Math.random() * (maxN + 1));
         console.log(`Testing with a = ${a}, b = ${b}`);
 
-        if (!compareStrategies(lcm_naive, lcm, a, b, 'Naive', 'Efficient') ||
+        if (!compareStrategies(lcm_naive1, lcm, a, b, 'Naive1', 'Efficient') ||
             !compareStrategies(lcm_naive2, lcm, a, b, 'Naive2', 'Efficient') ||
             !compareStrategies(lcm_naiveFunctional, lcm, a, b, 'Functional Naive', 'Efficient') ||
-            !compareStrategies(lcm_naive2Functional, lcm, a, b, 'Functional Naive2', 'Efficient') ||
             !compareStrategies(lcmFunctional, lcm, a, b, 'Functional', 'Efficient')) {
             return;
         }

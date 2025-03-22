@@ -9,7 +9,7 @@ def lcm(a, b):
     """Efficient computation of LCM using GCD."""
     return (a * b) // gcd(a, b)
 
-def lcm_naive(a, b):
+def lcm_naive1(a, b):
     """Naive approach to find LCM."""
     for l in range(1, a * b + 1):
         if l % a == 0 and l % b == 0:
@@ -64,4 +64,4 @@ def stress_test(max_iterations, max_n, *strategies):
 
 if __name__ == '__main__':
     # Uncomment to run stress test
-    stress_test(100000, 1000000, lcm_naive, lcm, lcm_naive_functional, lcm_functional)
+    stress_test(100000, 1000000, lcm_naive1, lcm_naive2, lcm, lcm_naive_functional, lcm_functional)
