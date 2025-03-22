@@ -5,7 +5,6 @@ dist
 tmp
 out-tsc
 out
-exe
 build
 classes
 Debug
@@ -85,7 +84,8 @@ ipch
 *.ear
 *.tar.gz
 *.rar
-#*.exe
+*.exe
+*.out
 *.pdb
 *.manifest
 *.cache
