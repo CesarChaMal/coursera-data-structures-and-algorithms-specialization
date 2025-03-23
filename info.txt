@@ -1,0 +1,11 @@
+If your project does not have a Cargo.toml yet:
+Open a terminal inside the project folder:
+cd /f/IdeaProjects/coursera-data-structures-and-algorithms-specialization
+
+Run:
+cargo init
+
+Move the code to scr folder then run:
+
+cargo run
+
