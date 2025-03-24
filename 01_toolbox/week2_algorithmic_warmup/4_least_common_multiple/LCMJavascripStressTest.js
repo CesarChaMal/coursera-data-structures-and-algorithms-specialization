@@ -48,17 +48,23 @@ function lcm(a, b) {
 }
 
 // O(a * b) time complexity - Naive Approach (Functional, Recursive)
-const lcm_naiveFunctional = (a, b) => {
+function lcm_naiveFunctional(a, b) {
     const limit = a * b;
 
-    const findLcmRecursive = (current) => {
-        if (current > limit) return limit;
-        if (current % a === 0 && current % b === 0) return current;
-        return findLcmRecursive(current + 1);
-    };
+    function* lcmGenerator() {
+        for (let current = 1; current <= limit; current++) {
+            yield current;
+        }
+    }
 
-    return findLcmRecursive(1);
-};
+    for (const current of lcmGenerator()) {
+        if (current % a === 0 && current % b === 0) {
+            return current;
+        }
+    }
+
+    return limit;
+}
 
 // O(log(min(a, b))) time complexity - Euclidean Algorithm for GCD
 const gcdFunctional = (a, b) => {

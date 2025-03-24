@@ -45,23 +45,26 @@ def lcm_functional(a, b):
 
     return (a * b) // euclid_gcd(a, b)
 
-def compare_strategies(a, b, *strategies):
+def compare_strategies(a, b, *strategies, debug=False):
     results = [strategy(a, b) for strategy in strategies]
     if len(set(results)) != 1:
-        print(f"Discrepancy found at a={a}, b={b}: {results}")
+        if debug:
+            print(f"Discrepancy found at a={a}, b={b}: {results}")
         return False
     return True
 
-def stress_test(max_iterations, max_n, *strategies):
+def stress_test(max_iterations, max_n, *strategies, debug=False):
     import random
     for iteration in range(max_iterations):
         a = random.randint(1, max_n)
         b = random.randint(1, max_n)
-        print(f"Testing with a = {a}, b = {b}")
-        if not compare_strategies(a, b, *strategies):
+        if debug:
+            print(f"Testing with a = {a}, b = {b}")
+        if not compare_strategies(a, b, *strategies, debug=debug):
             return
-        print("OK")
+        if debug:
+            print("OK")
 
 if __name__ == '__main__':
-    # Uncomment to run stress test
-    stress_test(100000, 1000000, lcm_naive1, lcm_naive2, lcm, lcm_naive_functional, lcm_functional)
+    # Uncomment to run stress test with debug output
+    stress_test(100000, 1000000, lcm_naive1, lcm_naive2, lcm, lcm_naive_functional, lcm_functional, debug=True)
